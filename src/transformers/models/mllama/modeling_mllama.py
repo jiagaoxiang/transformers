@@ -81,7 +81,7 @@ def _prepare_aspect_ratio_attention_mask(
     attention_mask = attention_mask.repeat(1, 1, target_length, 1) # (batch_size, max_num_tiles, target_length, 1)
 
     # Mask padding patches
-    pad_patches = target_length - num_patches 
+    pad_patches = target_length - num_patches
     attention_mask[:, :, -pad_patches:] = 0
 
     # Invert the mask (0 -> 1, 1 -> 0)
