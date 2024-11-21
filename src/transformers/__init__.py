@@ -4731,6 +4731,12 @@ else:
             "FlaxCLIPVisionPreTrainedModel",
         ]
     )
+    _import_structure["models.mllama"].extend(
+        [
+            "FlaxMllamaVisionModel",
+            "FlaxMllamaVisionPreTrainedModel",
+        ]
+    )
     _import_structure["models.dinov2"].extend(
         [
             "FlaxDinov2Model",
@@ -8979,6 +8985,10 @@ if TYPE_CHECKING:
             FlaxCLIPTextPreTrainedModel,
             FlaxCLIPVisionModel,
             FlaxCLIPVisionPreTrainedModel,
+        )
+        from .models.mllama import (
+            FlaxMllamaVisionModel,
+            FlaxMllamaVisionPreTrainedModel,
         )
         from .models.dinov2 import (
             FlaxDinov2ForImageClassification,

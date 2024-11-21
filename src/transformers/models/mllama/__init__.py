@@ -16,6 +16,7 @@ from typing import TYPE_CHECKING
 from ...utils import (
     OptionalDependencyNotAvailable,
     _LazyModule,
+    is_flax_available,
     is_torch_available,
     is_vision_available,
 )
@@ -49,6 +50,17 @@ except OptionalDependencyNotAvailable:
 else:
     _import_structure["image_processing_mllama"] = ["MllamaImageProcessor"]
 
+try:
+    if not is_flax_available():
+        raise OptionalDependencyNotAvailable()
+except OptionalDependencyNotAvailable:
+    pass
+else:
+    _import_structure["modeling_flax_mllama"] = [
+        "FlaxMllamaVisionModel",
+        "FlaxCLIPVisionPreTrainedModel",
+        ]
+
 
 if TYPE_CHECKING:
     from .configuration_mllama import MllamaConfig
@@ -67,6 +79,16 @@ if TYPE_CHECKING:
             MllamaTextModel,
             MllamaVisionModel,
         )
+    try:
+        if not is_flax_available():
+            raise OptionalDependencyNotAvailable()
+    except OptionalDependencyNotAvailable:
+        pass
+    else:
+        from .modeling_flax_mllama import (
+            FlaxMllamaVisionModel,
+            FlaxMllamaVisionPreTrainedModel,
+            )
 
     try:
         if not is_vision_available():

@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+"""Flax Mllama model."""
 from typing import Any, Optional, Tuple, Union
 
 import flax
@@ -33,7 +33,7 @@ from ...modeling_flax_utils import (
     overwrite_call_docstring,
 )
 from ...utils import ModelOutput, add_start_docstrings, logging
-from ..clip.configuration_clip import CLIPConfig, CLIPTextConfig, CLIPVisionConfig
+from .configuration_mllama import MllamaConfig, MllamaTextConfig, MllamaVisionConfig
 import math
 
 logger = logging.get_logger(__name__)
@@ -155,8 +155,8 @@ CLIP_INPUTS_DOCSTRING = r"""
             Whether or not to return a [`~utils.ModelOutput`] instead of a plain tuple.
 """
 
-class MllamaVisionAttention(nn.Module):
-  config: Union[CLIPTextConfig, CLIPVisionConfig]
+class FlaxMllamaVisionAttention(nn.Module):
+  config: Union[MllamaTextConfig, MllamaVisionConfig]
   dtype: jnp.dtype = jnp.float32
   weights_dtype: jnp.dtype = jnp.float32
 
@@ -228,8 +228,8 @@ class MllamaVisionAttention(nn.Module):
     return outputs
 
 
-class MllamaVisionMLP(nn.Module):
-  config: Union[CLIPTextConfig, CLIPVisionConfig]
+class FlaxMllamaVisionMLP(nn.Module):
+  config: Union[MllamaTextConfig, MllamaVisionConfig]
   dtype: jnp.dtype = jnp.float32
   weights_dtype: jnp.dtype = jnp.float32
 
@@ -255,17 +255,17 @@ class MllamaVisionMLP(nn.Module):
     return hidden_states
 
 
-class MllamaVisionEncoderLayer(nn.Module):
-  config: Union[CLIPTextConfig, CLIPVisionConfig]
+class FlaxMllamaVisionEncoderLayer(nn.Module):
+  config: Union[MllamaTextConfig, MllamaVisionConfig]
   dtype: jnp.dtype = jnp.float32
   weights_dtype: jnp.dtype = jnp.float32
   is_gated: bool = False
 
   def setup(self):
-    self.self_attn = MllamaVisionAttention(self.config, dtype=self.dtype, weights_dtype=self.weights_dtype)
-    self.input_layernorm = nn.LayerNorm(epsilon=self.config.layer_norm_eps, dtype=self.dtype, param_dtype=self.weights_dtype)
-    self.mlp = MllamaVisionMLP(self.config, dtype=self.dtype, weights_dtype=self.weights_dtype)
-    self.post_attention_layernorm = nn.LayerNorm(epsilon=self.config.layer_norm_eps, dtype=self.dtype, param_dtype=self.weights_dtype)
+    self.self_attn = FlaxMllamaVisionAttention(self.config, dtype=self.dtype, weights_dtype=self.weights_dtype)
+    self.input_layernorm = nn.LayerNorm(epsilon=self.config.norm_eps, dtype=self.dtype, param_dtype=self.weights_dtype)
+    self.mlp = FlaxMllamaVisionMLP(self.config, dtype=self.dtype, weights_dtype=self.weights_dtype)
+    self.post_attention_layernorm = nn.LayerNorm(epsilon=self.config.norm_eps, dtype=self.dtype, param_dtype=self.weights_dtype)
 
     if self.is_gated:
       self.gate_attn = self.param('gate_attn', nn.initializers.constant(math.pi / 4), (1,))
@@ -306,15 +306,15 @@ class MllamaVisionEncoderLayer(nn.Module):
     return outputs
 
 
-class MllamaVisionEncoder(nn.Module):
-  config: Union[CLIPTextConfig, CLIPVisionConfig]
+class FlaxMllamaVisionEncoder(nn.Module):
+  config: Union[MllamaTextConfig, MllamaVisionConfig]
   num_layers: 32
   dtype: jnp.dtype = jnp.float32
   weights_dtype: jnp.dtype = jnp.float32
 
   def setup(self):
     self.layers = [
-        MllamaVisionEncoderLayer(self.config, name=str(i), dtype=self.dtype, weights_dtype=self.weights_dtype)
+        FlaxMllamaVisionEncoderLayer(self.config, name=str(i), dtype=self.dtype, weights_dtype=self.weights_dtype)
         for i in range(self.num_layers)
     ]
 
@@ -348,15 +348,15 @@ class MllamaVisionEncoder(nn.Module):
 
     return FlaxBaseModelOutput(last_hidden_state=hidden_states, hidden_states=all_hidden_states, attentions=all_attentions)
 
-class MllamaPrecomputedPositionEmbedding(nn.Module):
+class FlaxMllamaPrecomputedPositionEmbedding(nn.Module):
     """
-    MllamaPrecomputedPositionEmbedding is a neural network module that computes position embeddings for input hidden states.
+    FlaxMllamaPrecomputedPositionEmbedding is a neural network module that computes position embeddings for input hidden states.
     It uses precomputed position embeddings and tile position embeddings based on aspect ratio IDs.
 
     Args:
         config: Configuration object containing model hyperparameters.
     """
-    config: CLIPVisionConfig
+    config: MllamaVisionConfig
     dtype: jnp.dtype = jnp.float32
     weights_dtype: jnp.dtype = jnp.float32
 
@@ -369,38 +369,38 @@ class MllamaPrecomputedPositionEmbedding(nn.Module):
         scale = hidden_size ** -0.5
 
         # Learnable gate parameter
-        self.gate = self.param("gate", jax.nn.initializers.zeros, (1,))
+        gate = self.param("gate", jax.nn.initializers.zeros, (1,))
 
         # Position embedding
-        self.position_embedding = self.param(
+        position_embedding = self.param(
             "embedding", 
             lambda key, shape: scale * jax.random.normal(key, shape), 
             (num_patches, hidden_size)
         )
 
         # Tile position embedding
-        self.tile_embedding = nn.Embed(
+        tile_embedding = nn.Embed(
             num_embeddings=max_aspect_ratio_id + 1, 
-            features=self.max_num_tiles * self.num_patches * self.hidden_size,
+            features=max_num_tiles * num_patches * hidden_size,
             dtype=self.dtype, param_dtype=self.weights_dtype,
         )
         # Apply gated position embedding
-        gated_position_embedding = (1 - jnp.tanh(self.gate)) * self.position_embedding
+        gated_position_embedding = (1 - jnp.tanh(gate)) * position_embedding
         hidden_state = hidden_state + gated_position_embedding.reshape(1, 1, num_patches, hidden_size)
 
         # Precomputed tile position embeddings
-        tile_position_embedding = self.tile_embedding[aspect_ratio_ids]
+        tile_position_embedding = tile_embedding(aspect_ratio_ids)
         batch_size = hidden_state.shape[0]
         tile_position_embedding = tile_position_embedding.reshape(
             batch_size, max_num_tiles, num_patches, hidden_size
         )
-        gated_tile_position_embedding = jnp.tanh(self.gate) * tile_position_embedding
+        gated_tile_position_embedding = jnp.tanh(gate) * tile_position_embedding
         hidden_state = hidden_state + gated_tile_position_embedding
 
         return hidden_state
 
-class MllamaVisionEmbeddings(nn.Module):
-  config: CLIPVisionConfig
+class FlaxMllamaVisionEmbeddings(nn.Module):
+  config: MllamaVisionConfig
   dtype: jnp.dtype = jnp.float32
   weights_dtype: jnp.dtype = jnp.float32
 
@@ -443,8 +443,8 @@ class MllamaVisionEmbeddings(nn.Module):
     embeddings = embeddings + self.position_embedding(self.position_ids)
     return embeddings
 
-class MllamaPrecomputedAspectRatioEmbedding(nn.Module):
-    config: CLIPVisionConfig
+class FlaxMllamaPrecomputedAspectRatioEmbedding(nn.Module):
+    config: MllamaVisionConfig
     dtype: jnp.dtype = jnp.float32
     weights_dtype: jnp.dtype = jnp.float32
     is_gated: bool = True
@@ -500,8 +500,8 @@ def _prepare_aspect_ratio_attention_mask(
 
     return attention_mask
 
-class MllamaVisionModel(nn.Module):
-  config: CLIPVisionConfig
+class FlaxMllamaVisionTransformer(nn.Module):
+  config: MllamaVisionConfig
   dtype: jnp.dtype = jnp.float32
   weights_dtype: jnp.dtype = jnp.float32
 
@@ -528,16 +528,16 @@ class MllamaVisionModel(nn.Module):
     )
 
     self.class_embedding = self.param("class_embedding", jax.nn.initializers.normal(stddev=0.02), (self.config.hidden_size,))
-    self.gated_positional_embedding = MllamaPrecomputedPositionEmbedding(self.config, dtype=self.dtype, weights_dtype=self.weights_dtype)
+    self.gated_positional_embedding = FlaxMllamaPrecomputedPositionEmbedding(self.config, dtype=self.dtype, weights_dtype=self.weights_dtype)
 
-    self.pre_tile_positional_embedding = MllamaPrecomputedAspectRatioEmbedding(self.config, is_gated=True, dtype=self.dtype, weights_dtype=self.weights_dtype)
-    self.post_tile_positional_embedding = MllamaPrecomputedAspectRatioEmbedding(self.config, is_gated=True, dtype=self.dtype, weights_dtype=self.weights_dtype)
+    self.pre_tile_positional_embedding = FlaxMllamaPrecomputedAspectRatioEmbedding(self.config, is_gated=True, dtype=self.dtype, weights_dtype=self.weights_dtype)
+    self.post_tile_positional_embedding = FlaxMllamaPrecomputedAspectRatioEmbedding(self.config, is_gated=True, dtype=self.dtype, weights_dtype=self.weights_dtype)
 
-    self.layrnorm_pre = nn.LayerNorm(epsilon=self.config.layer_norm_eps, dtype=self.dtype, param_dtype=self.weights_dtype)
-    self.layernorm_post = nn.LayerNorm(epsilon=self.config.layer_norm_eps, dtype=self.dtype, param_dtype=self.weights_dtype)
+    self.layernorm_pre = nn.LayerNorm(epsilon=self.config.norm_eps, dtype=self.dtype, param_dtype=self.weights_dtype)
+    self.layernorm_post = nn.LayerNorm(epsilon=self.config.norm_eps, dtype=self.dtype, param_dtype=self.weights_dtype)
     
-    self.transformer = MllamaVisionEncoder(self.config, self.config.num_hidden_layers, dtype=self.dtype, weights_dtype=self.weights_dtype)
-    self.global_transformer = MllamaVisionEncoder(self.config, self.config.num_global_layers, dtype=self.dtype, weights_dtype=self.weights_dtype)
+    self.transformer = FlaxMllamaVisionEncoder(self.config, self.config.num_hidden_layers, dtype=self.dtype, weights_dtype=self.weights_dtype)
+    self.global_transformer = FlaxMllamaVisionEncoder(self.config, self.config.num_global_layers, dtype=self.dtype, weights_dtype=self.weights_dtype)
 
   def get_input_embeddings(self):
       """
@@ -670,13 +670,13 @@ class MllamaVisionModel(nn.Module):
         )
 
 class FlaxMllamaVisionPreTrainedModel(FlaxPreTrainedModel):
-  config_class = CLIPVisionConfig
-  main_input_name = "pixel_values"
+  config_class = MllamaVisionConfig
+#   main_input_name = "pixel_values"
   module_class: nn.Module = None
 
   def __init__(
       self,
-      config: CLIPVisionConfig,
+      config: MllamaVisionConfig,
       input_shape: Optional[Tuple] = None,
       seed: int = 0,
       dtype: jnp.dtype = jnp.float32,
@@ -684,18 +684,20 @@ class FlaxMllamaVisionPreTrainedModel(FlaxPreTrainedModel):
       **kwargs,
   ):
     if input_shape is None:
-      input_shape = (1, config.image_size, config.image_size, 3)
+      input_shape = (1, 1, config.max_num_tiles, config.num_channels, config.image_size, config.image_size,)
     module = self.module_class(config=config, dtype=dtype, **kwargs)
     super().__init__(config, module, input_shape=input_shape, seed=seed, dtype=dtype, _do_init=_do_init)
 
   def init_weights(self, rng: jax.random.PRNGKey, input_shape: Tuple, params: FrozenDict = None) -> FrozenDict:
     # init input tensor
     pixel_values = jax.random.normal(rng, input_shape)
+    aspect_ratio_ids = jnp.zeros(input_shape[:2], dtype="i4")
+    aspect_ratio_mask = jnp.ones(input_shape[:3])
 
     params_rng, dropout_rng = jax.random.split(rng)
     rngs = {"params": params_rng, "dropout": dropout_rng}
 
-    random_params = self.module.init(rngs, pixel_values)["params"]
+    random_params = self.module.init(rngs, pixel_values, aspect_ratio_ids, aspect_ratio_mask)["params"]
 
     if params is not None:
       random_params = flatten_dict(unfreeze(random_params))
@@ -721,8 +723,6 @@ class FlaxMllamaVisionPreTrainedModel(FlaxPreTrainedModel):
     output_hidden_states = output_hidden_states if output_hidden_states is not None else self.config.output_hidden_states
     return_dict = return_dict if return_dict is not None else self.config.return_dict
 
-    pixel_values = jnp.transpose(pixel_values, (0, 2, 3, 1))
-
     # Handle any PRNG if needed
     rngs = {}
     if dropout_rng is not None:
@@ -739,34 +739,36 @@ class FlaxMllamaVisionPreTrainedModel(FlaxPreTrainedModel):
     )
 
 class FlaxMllamaVisionModule(nn.Module):
-  config: CLIPVisionConfig
+  config: MllamaVisionConfig
   dtype: jnp.dtype = jnp.float32
 
   def setup(self):
-    self.vision_model = MllamaVisionModel(self.config, dtype=self.dtype)
+    self.vision_model = FlaxMllamaVisionTransformer(self.config, dtype=self.dtype)
 
   def __call__(
       self,
-      pixel_values,
-      deterministic: bool = True,
+      pixel_values: jnp.ndarray,
+      aspect_ratio_ids: jnp.ndarray,
+      aspect_ratio_mask: jnp.ndarray,
       output_attentions: bool = False,
       output_hidden_states: bool = False,
       return_dict: bool = True,
   ):
     return self.vision_model(
         pixel_values=pixel_values,
-        deterministic=deterministic,
+        aspect_ratio_ids=aspect_ratio_ids, # a list of aspect ratio ids for the images in the data
+        aspect_ratio_mask=aspect_ratio_mask,
         output_attentions=output_attentions,
         output_hidden_states=output_hidden_states,
         return_dict=return_dict,
     )
 
 
-class FlaxCLIPVisionModel(FlaxMllamaVisionPreTrainedModel):
+class FlaxMllamaVisionModel(FlaxMllamaVisionPreTrainedModel):
   module_class = FlaxMllamaVisionModule
 
 
-FLAX_CLIP_VISION_MODEL_DOCSTRING = """
+FLAX_Mllama_VISION_MODEL_DOCSTRING = """
     Returns:
 
     Example:
@@ -774,10 +776,10 @@ FLAX_CLIP_VISION_MODEL_DOCSTRING = """
     ```python
     >>> from PIL import Image
     >>> import requests
-    >>> from transformers import AutoProcessor, FlaxCLIPVisionModel
+    >>> from transformers import AutoProcessor, FlaxMllamaVisionModel
 
-    >>> model = FlaxCLIPVisionModel.from_pretrained("openai/clip-vit-base-patch32")
-    >>> processor = AutoProcessor.from_pretrained("openai/clip-vit-base-patch32")
+    >>> model = FlaxMllamaVisionModel.from_pretrained("meta-llama/Llama-3.2-11B-Vision")
+    >>> processor = AutoProcessor.from_pretrained("meta-llama/Llama-3.2-11B-Vision")
 
     >>> url = "http://images.cocodataset.org/val2017/000000039769.jpg"
     >>> image = Image.open(requests.get(url, stream=True).raw)
@@ -790,7 +792,7 @@ FLAX_CLIP_VISION_MODEL_DOCSTRING = """
     ```
 """
 
-overwrite_call_docstring(FlaxCLIPVisionModel, CLIP_VISION_INPUTS_DOCSTRING + FLAX_CLIP_VISION_MODEL_DOCSTRING)
+overwrite_call_docstring(FlaxMllamaVisionModel, CLIP_VISION_INPUTS_DOCSTRING + FLAX_Mllama_VISION_MODEL_DOCSTRING)
 append_replace_return_docstrings(
-    FlaxCLIPVisionModel, output_type=FlaxBaseModelOutputWithPooling, config_class=CLIPVisionConfig
+    FlaxMllamaVisionModel, output_type=FlaxBaseModelOutputWithPooling, config_class=MllamaVisionConfig
 )
