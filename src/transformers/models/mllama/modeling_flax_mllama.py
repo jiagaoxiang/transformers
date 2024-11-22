@@ -314,7 +314,7 @@ class FlaxMllamaVisionEncoder(nn.Module):
 
   def setup(self):
     self.layers = [
-        FlaxMllamaVisionEncoderLayer(self.config, name=str(i), dtype=self.dtype, weights_dtype=self.weights_dtype)
+        FlaxMllamaVisionEncoderLayer(self.config, name="layers."+str(i), dtype=self.dtype, weights_dtype=self.weights_dtype)
         for i in range(self.num_layers)
     ]
 

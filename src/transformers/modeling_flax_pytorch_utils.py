@@ -15,6 +15,7 @@
 """PyTorch - Flax general utilities."""
 
 import os
+import re
 from pickle import UnpicklingError
 from typing import Dict, Tuple
 
@@ -150,6 +151,11 @@ def rename_key_and_reshape_tensor(
 
     return pt_tuple_key, pt_tensor
 
+def custom_split(pt_key):
+    # Regex to match 'layers.<number>' and split the rest on '.'
+    pattern = r'(layers\.\d+)|\.'
+    parts = [part for part in re.split(pattern, pt_key) if part and part != '.']
+    return tuple(parts)
 
 def convert_pytorch_state_dict_to_flax(pt_state_dict, flax_model):
     # convert pytorch tensor to numpy
@@ -190,7 +196,7 @@ def convert_pytorch_state_dict_to_flax(pt_state_dict, flax_model):
 
     # Need to change some parameters name to match Flax names
     for pt_key, pt_tensor in pt_state_dict.items():
-        pt_tuple_key = tuple(pt_key.split("."))
+        pt_tuple_key = custom_split(pt_key)
         is_bfloat_16 = weight_dtypes[pt_key] == bfloat16
 
         # remove base model prefix if necessary
