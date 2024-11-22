@@ -58,6 +58,7 @@ except OptionalDependencyNotAvailable:
 else:
     _import_structure["modeling_flax_mllama"] = [
         "FlaxMllamaVisionModel",
+        "FlaxMllamaVisionTransformer",
         "FlaxCLIPVisionPreTrainedModel",
         ]
 
@@ -87,6 +88,7 @@ if TYPE_CHECKING:
     else:
         from .modeling_flax_mllama import (
             FlaxMllamaVisionModel,
+            FlaxMllamaVisionTransformer,
             FlaxMllamaVisionPreTrainedModel,
             )
 

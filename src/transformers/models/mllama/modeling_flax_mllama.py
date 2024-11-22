@@ -162,7 +162,7 @@ class FlaxMllamaVisionAttention(nn.Module):
 
   def setup(self):
     self.embed_dim = self.config.hidden_size
-    self.num_heads = self.config.num_attention_heads
+    self.num_heads = self.config.attention_heads
     self.head_dim = self.embed_dim // self.num_heads
     if self.head_dim * self.num_heads != self.embed_dim:
       raise ValueError(
@@ -170,7 +170,6 @@ class FlaxMllamaVisionAttention(nn.Module):
           f" {self.num_heads})."
       )
     self.scale = self.head_dim**-0.5
-    self.dropout = self.config.attention_dropout
 
     self.k_proj = nn.Dense(
         self.embed_dim, dtype=self.dtype, param_dtype=self.weights_dtype, kernel_init=jax.nn.initializers.normal(0.01),
@@ -199,6 +198,7 @@ class FlaxMllamaVisionAttention(nn.Module):
       self,
       hidden_states,
       attention_mask: Optional[jnp.array] = None,
+      deterministic: bool = True,
       output_attentions: bool = None,
   ) -> jnp.array:
     query = self.q_proj(hidden_states)
@@ -216,7 +216,7 @@ class FlaxMllamaVisionAttention(nn.Module):
         query,
         key,
         mask=causal_mask,
-        deterministic=True,
+        deterministic=deterministic,
         dtype=self.dtype,
     )
 
@@ -280,7 +280,7 @@ class FlaxMllamaVisionEncoderLayer(nn.Module):
   ):
     residual = hidden_states
     hidden_states = self.input_layernorm(hidden_states)
-    hidden_states, attn_weights = self.self_attn(
+    output= self.self_attn(
         hidden_states=hidden_states,
         attention_mask=attention_mask,
         deterministic=deterministic,
@@ -288,8 +288,8 @@ class FlaxMllamaVisionEncoderLayer(nn.Module):
     )
     # Apply residual connection with optional gating for attention
     if self.is_gated:
-        hidden_states = jnp.tanh(self.gate_attn) * hidden_states
-    hidden_states = residual + hidden_states
+        hidden_states = jnp.tanh(self.gate_attn) * output[0]
+    hidden_states = residual + output[0]
 
     residual = hidden_states
     hidden_states = self.post_attention_layernorm(hidden_states)
@@ -301,7 +301,7 @@ class FlaxMllamaVisionEncoderLayer(nn.Module):
     outputs = (hidden_states,)
 
     if output_attentions:
-      outputs += (attn_weights,)
+      outputs += (output[1],)
 
     return outputs
 
@@ -380,6 +380,7 @@ class FlaxMllamaPrecomputedPositionEmbedding(nn.Module):
 
         # Tile position embedding
         tile_embedding = nn.Embed(
+            name="tile_embedding",
             num_embeddings=max_aspect_ratio_id + 1, 
             features=max_num_tiles * num_patches * hidden_size,
             dtype=self.dtype, param_dtype=self.weights_dtype,
@@ -523,7 +524,6 @@ class FlaxMllamaVisionTransformer(nn.Module):
         padding="VALID",
         use_bias=False,
         dtype=self.dtype,
-        param_dtype=self.weights_dtype,
         kernel_init=jax.nn.initializers.normal(),
     )
 
@@ -573,9 +573,12 @@ class FlaxMllamaVisionTransformer(nn.Module):
         aspect_ratio_ids = aspect_ratio_ids.reshape((batch_size * num_concurrent_media, -1))
 
         # Patch embedding
-        patch_embeds = self.patch_embedding(pixel_values)
+        print("5", pixel_values.shape)
+        patch_embeds = self.patch_embedding(pixel_values.transpose((0, 2, 3, 1)))
+        patch_embeds = patch_embeds.transpose((0, 3, 1, 2))
+        print("6", patch_embeds.shape)
         hidden_state = patch_embeds.reshape(batch_size * num_concurrent_media * num_tiles, self.hidden_size, -1).swapaxes(1, 2)
-
+        print("4", hidden_state.shape)
         # Tile embeddings
         _, num_patches, dim = hidden_state.shape
         hidden_state = hidden_state.reshape((batch_size * num_concurrent_media, num_tiles, -1, dim))
@@ -588,6 +591,7 @@ class FlaxMllamaVisionTransformer(nn.Module):
 
         # Position embeddings
         hidden_state = hidden_state.reshape((batch_size * num_concurrent_media, num_tiles, num_patches, dim))
+        print("3", hidden_state.shape)
         hidden_state = self.gated_positional_embedding(hidden_state, aspect_ratio_ids)
 
         hidden_state = self.layernorm_pre(hidden_state)
@@ -609,6 +613,7 @@ class FlaxMllamaVisionTransformer(nn.Module):
 
         # Apply encoder
         hidden_state = hidden_state.reshape((batch_size * num_concurrent_media, -1, dim))
+        print("2", hidden_state.shape)
         output = self.transformer(
             hidden_state,
             attention_mask=attention_mask,
@@ -616,6 +621,7 @@ class FlaxMllamaVisionTransformer(nn.Module):
             output_attentions=output_attentions,
         )
         hidden_state = output[0]
+        print("1", hidden_state.shape)
 
         hidden_state = self.layernorm_post(hidden_state)
 
@@ -766,6 +772,7 @@ class FlaxMllamaVisionModule(nn.Module):
 
 class FlaxMllamaVisionModel(FlaxMllamaVisionPreTrainedModel):
   module_class = FlaxMllamaVisionModule
+  base_model_prefix = "vision_model"
 
 
 FLAX_Mllama_VISION_MODEL_DOCSTRING = """

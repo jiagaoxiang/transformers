@@ -4734,6 +4734,7 @@ else:
     _import_structure["models.mllama"].extend(
         [
             "FlaxMllamaVisionModel",
+            "FlaxMllamaVisionTransformer",
             "FlaxMllamaVisionPreTrainedModel",
         ]
     )
@@ -8988,6 +8989,7 @@ if TYPE_CHECKING:
         )
         from .models.mllama import (
             FlaxMllamaVisionModel,
+            FlaxMllamaVisionTransformer,
             FlaxMllamaVisionPreTrainedModel,
         )
         from .models.dinov2 import (
