@@ -222,7 +222,7 @@ class FlaxMllamaVisionAttention(nn.Module):
 
     attn_output = jnp.einsum("...hqk,...khd->...qhd", attn_weights, value)
     attn_output = self._merge_heads(attn_output)
-    attn_output = self.out_proj(attn_output)
+    attn_output = self.o_proj(attn_output)
 
     outputs = (attn_output, attn_weights) if output_attentions else (attn_output,)
     return outputs
@@ -311,10 +311,11 @@ class FlaxMllamaVisionEncoder(nn.Module):
   num_layers: 32
   dtype: jnp.dtype = jnp.float32
   weights_dtype: jnp.dtype = jnp.float32
+  is_gated: bool = False
 
   def setup(self):
     self.layers = [
-        FlaxMllamaVisionEncoderLayer(self.config, name="layers."+str(i), dtype=self.dtype, weights_dtype=self.weights_dtype)
+        FlaxMllamaVisionEncoderLayer(self.config, name="layers."+str(i), dtype=self.dtype, weights_dtype=self.weights_dtype, is_gated=self.is_gated)
         for i in range(self.num_layers)
     ]
 
@@ -537,7 +538,7 @@ class FlaxMllamaVisionTransformer(nn.Module):
     self.layernorm_post = nn.LayerNorm(epsilon=self.config.norm_eps, dtype=self.dtype, param_dtype=self.weights_dtype)
     
     self.transformer = FlaxMllamaVisionEncoder(self.config, self.config.num_hidden_layers, dtype=self.dtype, weights_dtype=self.weights_dtype)
-    self.global_transformer = FlaxMllamaVisionEncoder(self.config, self.config.num_global_layers, dtype=self.dtype, weights_dtype=self.weights_dtype)
+    self.global_transformer = FlaxMllamaVisionEncoder(self.config, self.config.num_global_layers, dtype=self.dtype, weights_dtype=self.weights_dtype, is_gated=True)
 
   def get_input_embeddings(self):
       """
@@ -573,12 +574,10 @@ class FlaxMllamaVisionTransformer(nn.Module):
         aspect_ratio_ids = aspect_ratio_ids.reshape((batch_size * num_concurrent_media, -1))
 
         # Patch embedding
-        print("5", pixel_values.shape)
         patch_embeds = self.patch_embedding(pixel_values.transpose((0, 2, 3, 1)))
         patch_embeds = patch_embeds.transpose((0, 3, 1, 2))
-        print("6", patch_embeds.shape)
         hidden_state = patch_embeds.reshape(batch_size * num_concurrent_media * num_tiles, self.hidden_size, -1).swapaxes(1, 2)
-        print("4", hidden_state.shape)
+
         # Tile embeddings
         _, num_patches, dim = hidden_state.shape
         hidden_state = hidden_state.reshape((batch_size * num_concurrent_media, num_tiles, -1, dim))
@@ -591,7 +590,6 @@ class FlaxMllamaVisionTransformer(nn.Module):
 
         # Position embeddings
         hidden_state = hidden_state.reshape((batch_size * num_concurrent_media, num_tiles, num_patches, dim))
-        print("3", hidden_state.shape)
         hidden_state = self.gated_positional_embedding(hidden_state, aspect_ratio_ids)
 
         hidden_state = self.layernorm_pre(hidden_state)
@@ -613,7 +611,6 @@ class FlaxMllamaVisionTransformer(nn.Module):
 
         # Apply encoder
         hidden_state = hidden_state.reshape((batch_size * num_concurrent_media, -1, dim))
-        print("2", hidden_state.shape)
         output = self.transformer(
             hidden_state,
             attention_mask=attention_mask,
@@ -621,8 +618,6 @@ class FlaxMllamaVisionTransformer(nn.Module):
             output_attentions=output_attentions,
         )
         hidden_state = output[0]
-        print("1", hidden_state.shape)
-
         hidden_state = self.layernorm_post(hidden_state)
 
         # Apply global encoder
