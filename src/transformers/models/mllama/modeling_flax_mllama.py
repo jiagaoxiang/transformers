@@ -718,9 +718,10 @@ class FlaxMllamaVisionPreTrainedModel(FlaxPreTrainedModel):
   def __call__(
       self,
       pixel_values,
+      aspect_ratio_ids: jnp.ndarray,
+      aspect_ratio_mask: jnp.ndarray,
       params: dict = None,
       dropout_rng: jax.random.PRNGKey = None,
-      train: bool = False,
       output_attentions: Optional[bool] = None,
       output_hidden_states: Optional[bool] = None,
       return_dict: Optional[bool] = None,
@@ -737,7 +738,8 @@ class FlaxMllamaVisionPreTrainedModel(FlaxPreTrainedModel):
     return self.module.apply(
         {"params": params or self.params},
         jnp.array(pixel_values, dtype=jnp.float32),
-        not train,
+        aspect_ratio_ids,
+        aspect_ratio_mask,
         output_attentions,
         output_hidden_states,
         return_dict,
