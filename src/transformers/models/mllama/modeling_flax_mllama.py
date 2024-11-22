@@ -183,7 +183,7 @@ class FlaxMllamaVisionAttention(nn.Module):
         self.embed_dim, dtype=self.dtype, param_dtype=self.weights_dtype, kernel_init=jax.nn.initializers.normal(0.01),
         use_bias=False
     )
-    self.out_proj = nn.Dense(
+    self.o_proj = nn.Dense(
         self.embed_dim, dtype=self.dtype, param_dtype=self.weights_dtype, kernel_init=jax.nn.initializers.normal(0.01),
         use_bias=False
     )

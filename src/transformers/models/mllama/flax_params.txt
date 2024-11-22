@@ -1,332 +1,493 @@
-{'vision_model': {'class_embedding': (1280,),
-  'gated_positional_embedding': {'embedding': (1025, 1280),
-   'gate': (1,),
-   'tile_embedding': {'embedding': (9, 5248000)}},
-  'global_transformer': {'0': {'input_layernorm': {'bias': (1280,),
-     'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '1': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '2': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '3': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '4': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '5': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '6': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '7': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}}},
-  'layernorm_post': {'bias': (1280,), 'scale': (1280,)},
-  'layernorm_pre': {'bias': (1280,), 'scale': (1280,)},
-  'patch_embedding': {'kernel': (14, 14, 3, 1280)},
-  'post_tile_positional_embedding': {'embedding': {'embedding': (9, 5120)},
-   'gate': (1,)},
-  'pre_tile_positional_embedding': {'embedding': {'embedding': (9, 5120)},
-   'gate': (1,)},
-  'transformer': {'0': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '1': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '10': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '11': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '12': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '13': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '14': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '15': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '16': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '17': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '18': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '19': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '2': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '20': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '21': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '22': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '23': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '24': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '25': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '26': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '27': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '28': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '29': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '3': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '30': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '31': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '4': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '5': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '6': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '7': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '8': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}},
-   '9': {'input_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'mlp': {'fc1': {'bias': (5120,), 'kernel': (1280, 5120)},
-     'fc2': {'bias': (1280,), 'kernel': (5120, 1280)}},
-    'post_attention_layernorm': {'bias': (1280,), 'scale': (1280,)},
-    'self_attn': {'k_proj': {'kernel': (1280, 1280)},
-     'out_proj': {'kernel': (1280, 1280)},
-     'q_proj': {'kernel': (1280, 1280)},
-     'v_proj': {'kernel': (1280, 1280)}}}}}}
+['vision_model']['class_embedding']   (1280,); bfloat16
+['vision_model']['gated_positional_embedding']['embedding']   (1025, 1280); bfloat16
+['vision_model']['gated_positional_embedding']['gate']   (1,); bfloat16
+['vision_model']['gated_positional_embedding']['tile_embedding']['embedding']   (9, 5248000); bfloat16
+['vision_model']['global_transformer']['layers.0']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.0']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.0']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['global_transformer']['layers.0']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['global_transformer']['layers.0']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.0']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['global_transformer']['layers.0']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.0']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.0']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['global_transformer']['layers.0']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['global_transformer']['layers.0']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['global_transformer']['layers.0']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['global_transformer']['layers.1']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.1']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.1']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['global_transformer']['layers.1']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['global_transformer']['layers.1']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.1']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['global_transformer']['layers.1']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.1']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.1']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['global_transformer']['layers.1']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['global_transformer']['layers.1']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['global_transformer']['layers.1']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['global_transformer']['layers.2']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.2']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.2']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['global_transformer']['layers.2']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['global_transformer']['layers.2']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.2']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['global_transformer']['layers.2']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.2']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.2']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['global_transformer']['layers.2']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['global_transformer']['layers.2']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['global_transformer']['layers.2']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['global_transformer']['layers.3']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.3']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.3']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['global_transformer']['layers.3']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['global_transformer']['layers.3']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.3']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['global_transformer']['layers.3']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.3']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.3']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['global_transformer']['layers.3']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['global_transformer']['layers.3']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['global_transformer']['layers.3']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['global_transformer']['layers.4']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.4']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.4']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['global_transformer']['layers.4']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['global_transformer']['layers.4']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.4']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['global_transformer']['layers.4']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.4']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.4']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['global_transformer']['layers.4']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['global_transformer']['layers.4']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['global_transformer']['layers.4']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['global_transformer']['layers.5']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.5']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.5']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['global_transformer']['layers.5']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['global_transformer']['layers.5']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.5']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['global_transformer']['layers.5']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.5']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.5']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['global_transformer']['layers.5']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['global_transformer']['layers.5']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['global_transformer']['layers.5']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['global_transformer']['layers.6']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.6']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.6']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['global_transformer']['layers.6']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['global_transformer']['layers.6']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.6']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['global_transformer']['layers.6']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.6']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.6']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['global_transformer']['layers.6']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['global_transformer']['layers.6']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['global_transformer']['layers.6']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['global_transformer']['layers.7']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.7']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.7']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['global_transformer']['layers.7']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['global_transformer']['layers.7']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.7']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['global_transformer']['layers.7']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.7']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['global_transformer']['layers.7']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['global_transformer']['layers.7']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['global_transformer']['layers.7']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['global_transformer']['layers.7']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['layernorm_post']['bias']   (1280,); bfloat16
+['vision_model']['layernorm_post']['scale']   (1280,); bfloat16
+['vision_model']['layernorm_pre']['bias']   (1280,); bfloat16
+['vision_model']['layernorm_pre']['scale']   (1280,); bfloat16
+['vision_model']['patch_embedding']['kernel']   (14, 14, 3, 1280); bfloat16
+['vision_model']['post_tile_positional_embedding']['embedding']['embedding']   (9, 5120); bfloat16
+['vision_model']['post_tile_positional_embedding']['gate']   (1,); bfloat16
+['vision_model']['pre_tile_positional_embedding']['embedding']['embedding']   (9, 5120); bfloat16
+['vision_model']['pre_tile_positional_embedding']['gate']   (1,); bfloat16
+['vision_model']['transformer']['layers.0']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.0']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.0']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.0']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.0']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.0']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.0']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.0']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.0']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.0']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.0']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.0']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.1']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.1']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.1']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.1']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.1']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.1']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.1']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.1']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.1']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.1']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.1']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.1']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.10']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.10']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.10']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.10']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.10']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.10']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.10']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.10']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.10']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.10']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.10']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.10']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.11']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.11']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.11']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.11']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.11']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.11']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.11']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.11']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.11']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.11']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.11']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.11']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.12']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.12']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.12']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.12']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.12']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.12']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.12']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.12']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.12']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.12']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.12']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.12']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.13']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.13']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.13']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.13']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.13']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.13']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.13']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.13']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.13']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.13']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.13']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.13']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.14']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.14']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.14']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.14']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.14']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.14']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.14']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.14']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.14']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.14']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.14']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.14']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.15']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.15']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.15']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.15']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.15']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.15']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.15']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.15']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.15']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.15']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.15']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.15']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.16']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.16']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.16']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.16']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.16']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.16']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.16']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.16']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.16']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.16']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.16']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.16']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.17']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.17']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.17']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.17']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.17']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.17']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.17']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.17']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.17']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.17']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.17']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.17']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.18']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.18']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.18']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.18']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.18']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.18']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.18']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.18']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.18']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.18']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.18']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.18']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.19']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.19']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.19']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.19']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.19']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.19']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.19']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.19']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.19']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.19']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.19']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.19']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.2']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.2']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.2']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.2']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.2']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.2']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.2']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.2']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.2']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.2']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.2']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.2']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.20']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.20']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.20']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.20']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.20']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.20']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.20']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.20']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.20']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.20']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.20']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.20']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.21']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.21']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.21']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.21']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.21']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.21']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.21']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.21']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.21']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.21']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.21']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.21']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.22']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.22']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.22']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.22']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.22']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.22']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.22']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.22']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.22']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.22']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.22']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.22']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.23']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.23']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.23']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.23']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.23']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.23']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.23']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.23']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.23']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.23']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.23']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.23']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.24']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.24']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.24']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.24']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.24']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.24']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.24']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.24']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.24']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.24']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.24']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.24']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.25']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.25']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.25']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.25']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.25']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.25']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.25']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.25']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.25']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.25']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.25']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.25']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.26']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.26']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.26']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.26']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.26']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.26']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.26']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.26']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.26']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.26']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.26']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.26']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.27']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.27']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.27']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.27']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.27']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.27']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.27']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.27']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.27']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.27']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.27']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.27']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.28']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.28']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.28']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.28']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.28']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.28']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.28']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.28']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.28']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.28']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.28']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.28']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.29']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.29']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.29']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.29']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.29']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.29']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.29']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.29']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.29']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.29']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.29']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.29']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.3']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.3']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.3']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.3']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.3']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.3']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.3']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.3']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.3']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.3']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.3']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.3']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.30']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.30']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.30']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.30']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.30']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.30']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.30']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.30']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.30']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.30']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.30']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.30']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.31']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.31']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.31']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.31']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.31']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.31']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.31']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.31']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.31']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.31']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.31']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.31']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.4']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.4']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.4']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.4']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.4']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.4']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.4']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.4']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.4']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.4']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.4']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.4']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.5']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.5']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.5']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.5']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.5']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.5']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.5']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.5']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.5']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.5']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.5']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.5']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.6']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.6']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.6']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.6']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.6']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.6']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.6']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.6']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.6']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.6']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.6']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.6']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.7']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.7']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.7']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.7']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.7']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.7']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.7']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.7']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.7']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.7']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.7']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.7']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.8']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.8']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.8']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.8']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.8']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.8']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.8']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.8']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.8']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.8']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.8']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.8']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.9']['input_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.9']['input_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.9']['mlp']['fc1']['bias']   (5120,); bfloat16
+['vision_model']['transformer']['layers.9']['mlp']['fc1']['kernel']   (1280, 5120); bfloat16
+['vision_model']['transformer']['layers.9']['mlp']['fc2']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.9']['mlp']['fc2']['kernel']   (5120, 1280); bfloat16
+['vision_model']['transformer']['layers.9']['post_attention_layernorm']['bias']   (1280,); bfloat16
+['vision_model']['transformer']['layers.9']['post_attention_layernorm']['scale']   (1280,); bfloat16
+['vision_model']['transformer']['layers.9']['self_attn']['k_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.9']['self_attn']['out_proj']['kernel']   (1280, 1280); float32
+['vision_model']['transformer']['layers.9']['self_attn']['q_proj']['kernel']   (1280, 1280); bfloat16
+['vision_model']['transformer']['layers.9']['self_attn']['v_proj']['kernel']   (1280, 1280); bfloat16
