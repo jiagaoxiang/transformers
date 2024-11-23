@@ -328,9 +328,9 @@ class MllamaVisionSdpaAttention(MllamaVisionAttention):
 
         attn_output = F.scaled_dot_product_attention(query, key, value, attn_mask=attention_mask)
         # [1, 16, 4128, 80]
+        print(f'torch {attn_output.shape}', attn_output)
         attn_output = attn_output.transpose(1, 2).contiguous()
         attn_output = attn_output.reshape(batch_size, q_seq_len, -1)
-        print(f'torch {attn_output.shape}', attn_output)
         output = self.o_proj(attn_output)
 
         return output, None
