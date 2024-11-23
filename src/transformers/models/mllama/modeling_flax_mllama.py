@@ -211,7 +211,7 @@ class FlaxMllamaVisionAttention(nn.Module):
 
     if attention_mask is not None:# Ensure the attention mask matches the key sequence length
       causal_mask = attention_mask[:, :, :, : key.shape[-3]] # (batch_size, 1, q_seq_len, kv_seq_len)
-
+    
     attn_weights = dot_product_attention_weights(
         query,
         key,
@@ -221,9 +221,10 @@ class FlaxMllamaVisionAttention(nn.Module):
     )
 
     attn_output = jnp.einsum("...hqk,...khd->...qhd", attn_weights, value)
+    # (1, 4128, 16, 80)
     attn_output = self._merge_heads(attn_output)
+    print(f'jax {attn_output.shape}', attn_output)
     attn_output = self.o_proj(attn_output)
-
     outputs = (attn_output, attn_weights) if output_attentions else (attn_output,)
     return outputs
 
