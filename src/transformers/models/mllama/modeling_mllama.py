@@ -331,7 +331,6 @@ class MllamaVisionSdpaAttention(MllamaVisionAttention):
         attn_output = attn_output.transpose(1, 2).contiguous()
         attn_output = attn_output.reshape(batch_size, q_seq_len, -1)
         output = self.o_proj(attn_output)
-        print(f'torch {output.shape}', output)
         return output, None
 
 

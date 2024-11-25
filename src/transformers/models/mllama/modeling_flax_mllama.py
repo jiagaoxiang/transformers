@@ -220,13 +220,10 @@ class FlaxMllamaVisionAttention(nn.Module):
         dtype=self.dtype,
     )
     attn_output = jnp.einsum("...hqk,...khd->...qhd", attn_weights, value)
-    # (1, 4128, 16, 80)
-
     attn_output = self._merge_heads(attn_output)
     
     attn_output = self.o_proj(attn_output)
-    print(f'jax {attn_output.shape}', attn_output)
-    outputs = (attn_output, attn_weights) if output_attentions else (attn_output,)
+    outputs = (attn_output, attn_weights) if output_attentions else (attn_output, None)
     return outputs
 
 
@@ -282,7 +279,7 @@ class FlaxMllamaVisionEncoderLayer(nn.Module):
   ):
     residual = hidden_states
     hidden_states = self.input_layernorm(hidden_states)
-    output= self.self_attn(
+    hidden_states, attn_weights= self.self_attn(
         hidden_states=hidden_states,
         attention_mask=attention_mask,
         deterministic=deterministic,
@@ -290,8 +287,8 @@ class FlaxMllamaVisionEncoderLayer(nn.Module):
     )
     # Apply residual connection with optional gating for attention
     if self.is_gated:
-        hidden_states = jnp.tanh(self.gate_attn) * output[0]
-    hidden_states = residual + output[0]
+        hidden_states = jnp.tanh(self.gate_attn) * hidden_states
+    hidden_states = residual + hidden_states
 
     residual = hidden_states
     hidden_states = self.post_attention_layernorm(hidden_states)
@@ -303,7 +300,7 @@ class FlaxMllamaVisionEncoderLayer(nn.Module):
     outputs = (hidden_states,)
 
     if output_attentions:
-      outputs += (output[1],)
+      outputs += (attn_weights,)
 
     return outputs
 
