@@ -215,16 +215,17 @@ class FlaxMllamaVisionAttention(nn.Module):
     attn_weights = dot_product_attention_weights(
         query,
         key,
-        mask=causal_mask,
+        bias=causal_mask,
         deterministic=deterministic,
         dtype=self.dtype,
     )
     attn_output = jnp.einsum("...hqk,...khd->...qhd", attn_weights, value)
     # (1, 4128, 16, 80)
-    print(f'jax {attn_output.swapaxes(1,2).shape}', attn_output.swapaxes(1,2))
+
     attn_output = self._merge_heads(attn_output)
     
     attn_output = self.o_proj(attn_output)
+    print(f'jax {attn_output.shape}', attn_output)
     outputs = (attn_output, attn_weights) if output_attentions else (attn_output,)
     return outputs
 
@@ -607,7 +608,7 @@ class FlaxMllamaVisionTransformer(nn.Module):
             aspect_ratio_mask=attention_mask,
             num_patches=self.num_patches,
             target_length=hidden_state.shape[2],
-            dtype=hidden_state.dtype,
+            dtype=self.dtype,
         )
 
         # Apply encoder
